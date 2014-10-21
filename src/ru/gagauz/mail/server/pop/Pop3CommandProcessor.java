@@ -94,6 +94,18 @@ public class Pop3CommandProcessor extends CommandProcessor {
         try {
             switch (com) {
 
+            case CAPA: {
+                send("+OK List of capabilities follows");
+                //                send("STSL");
+                send("SASL PLAIN ANONYMOUS");
+                send("TOP");
+                send("USER");
+                send("UIDL");
+                send("IMPLEMENTATION Miga own POP3 server");
+                send(".");
+                return;
+            }
+
             case AUTH: {
                 send("+ " + HashUtils.encodeBase64("OK".getBytes()));
                 return;
@@ -110,18 +122,6 @@ public class Pop3CommandProcessor extends CommandProcessor {
                 } else {
                     send("-ERR invalid password");
                 }
-                return;
-            }
-
-            case CAPA: {
-                send("+OK List of capabilities follows");
-                //                send("STSL");
-                send("SASL PLAIN ANONYMOUS");
-                send("TOP");
-                send("USER");
-                send("UIDL");
-                send("IMPLEMENTATION Miga own POP3 server");
-                send(".");
                 return;
             }
 
@@ -156,7 +156,7 @@ public class Pop3CommandProcessor extends CommandProcessor {
             case DELE: {
                 int index = Integer.parseInt(args[1]);
                 Message message = mailBox.getMessages()[index - 1];
-                message.trash();
+                message.setTrash(true);
                 send("+OK Message %d was moved to trash", index);
                 return;
             }
@@ -224,7 +224,7 @@ public class Pop3CommandProcessor extends CommandProcessor {
 
             case RSET: {
                 for (int i = 0; i < mailBox.getMessages().length; i++) {
-                    mailBox.getMessages()[i].untrash();
+                    mailBox.getMessages()[i].setTrash(false);
                 }
                 send("+OK");
                 return;
@@ -243,11 +243,5 @@ public class Pop3CommandProcessor extends CommandProcessor {
             send("-ERR Expecting number but %s was given", args[1]);
         }
 
-    }
-
-    public static void main(String[] args) {
-        //"e888fab2c8faa397fe4a4f6fb627c285";
-        //"e888fab2c8faa397fe4a4f6fb627c285";
-        System.out.println(HashUtils.md5("<15.1413814557@/127.0.0.1>123123"));
     }
 }

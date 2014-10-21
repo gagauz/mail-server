@@ -59,10 +59,6 @@ public class IOConnectionFactory implements ConnectionFactory {
         return new ServerConnection() {
             private final SSLServerSocket server = (SSLServerSocket) SSLServerSocketFactory.getDefault().createServerSocket(port);
 
-            {
-                server.setEnabledCipherSuites(server.getSupportedCipherSuites());
-            }
-
             @Override
             public ClientConnection accept() throws IOException {
 

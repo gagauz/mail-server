@@ -1,7 +1,7 @@
 package ru.gagauz.mail.db;
 
-import ru.gagauz.socket.server.StreamUtils;
 import ru.gagauz.utils.hash.HashUtils;
+import ru.gagauz.utils.stream.StreamUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,12 +31,12 @@ public class Message {
         return HashUtils.md5(file.getName());
     }
 
-    public void trash() {
-        this.trash = true;
+    public void setTrash(boolean trash) {
+        this.trash = trash;
     }
 
-    public void untrash() {
-        this.trash = false;
+    public boolean isTrash() {
+        return trash;
     }
 
     public class Content {

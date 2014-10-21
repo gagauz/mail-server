@@ -1,4 +1,4 @@
-package ru.gagauz.utils;
+package ru.gagauz.utils.collection;
 
 import java.util.ArrayList;
 import java.util.HashMap;

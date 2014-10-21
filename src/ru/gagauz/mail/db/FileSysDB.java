@@ -1,6 +1,6 @@
 package ru.gagauz.mail.db;
 
-import ru.gagauz.utils.Tools;
+import ru.gagauz.utils.collection.Tools;
 
 import java.io.File;
 import java.util.Map;
@@ -11,17 +11,20 @@ public class FileSysDB implements DB {
     private final File queue;
     private final Map<String, MailBox> mailBoxCache = Tools.hasMap();
 
-    public FileSysDB(File directory, File queue) {
+    public FileSysDB(File directory) {
         if (directory.isDirectory()) {
             this.directory = directory;
         } else {
             throw new RuntimeException("Directory " + directory + " does'n exists or is not readable.");
         }
-        if (queue.isDirectory()) {
-            this.queue = queue;
-        } else {
-            throw new RuntimeException("Directory " + queue + " does'n exists or is not readable.");
+        queue = new File(directory, "sent");
+        if (!queue.isDirectory()) {
+            queue.mkdir();
         }
+    }
+
+    public void storeSent() {
+
     }
 
     @Override

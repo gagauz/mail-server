@@ -1,6 +1,6 @@
 package ru.gagauz.mail.db;
 
-import ru.gagauz.socket.server.StreamUtils;
+import ru.gagauz.utils.stream.StreamUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
