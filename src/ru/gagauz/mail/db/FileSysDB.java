@@ -35,7 +35,7 @@ public class FileSysDB implements DB {
         }
         File file = new File(directory.getAbsolutePath() + '/' + name);
         try {
-            if (file.isDirectory()) {
+            if (file.exists() && file.isDirectory()) {
                 mailBox = new MailBox(file);
                 mailBoxCache.put(name, mailBox);
                 return mailBox;

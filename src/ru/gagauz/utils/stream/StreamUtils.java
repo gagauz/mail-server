@@ -39,11 +39,19 @@ public class StreamUtils {
     public static ByteArrayOutputStream read(InputStream in) throws IOException {
         byte[] bytes = new byte[4094];
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        int r = 0;
-        while ((r = in.read(bytes)) > 0) {
-            out.write(bytes, 0, r);
+        int r;
+        while (true) {
+            r = in.read(bytes);
+            if (r == -1) {
+                break;
+            } else {
+                out.write(bytes, 0, r);
+                if (r != 4094)
+                    break;
+            }
         }
+        out.flush();
         return out;
-    }
 
+    }
 }

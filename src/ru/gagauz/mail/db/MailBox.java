@@ -2,10 +2,7 @@ package ru.gagauz.mail.db;
 
 import ru.gagauz.utils.stream.StreamUtils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FilenameFilter;
-import java.io.InputStream;
+import java.io.*;
 
 public class MailBox {
 
@@ -64,6 +61,20 @@ public class MailBox {
         for (int i = 0; i < mf.length; i++) {
             messages[i] = new Message(mf[i]);
             size += mf[i].length();
+        }
+    }
+
+    public void deliver(StringBuffer body) {
+        File messageFile = new File(file, System.currentTimeMillis() + "_" + Thread.currentThread().getId());
+        OutputStream out;
+        try {
+            messageFile.createNewFile();
+            out = new BufferedOutputStream(new FileOutputStream(messageFile));
+            StreamUtils.writeString(out, body.toString());
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

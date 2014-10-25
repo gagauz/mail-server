@@ -1,8 +1,7 @@
 package ru.gagauz.socket.server;
 
-import ru.gagauz.utils.stream.StreamUtils;
-
 import com.sun.corba.se.pept.transport.ReaderThread;
+import ru.gagauz.utils.stream.StreamUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,7 +47,7 @@ public class SocketIO {
     public synchronized void writeString(String obj) {
         System.out.println("<" + obj);
         try {
-            StreamUtils.writeString(writer, obj + "\n");
+            StreamUtils.writeString(writer, obj + "\r\n");
         } catch (IOException e) {
             closeSocket();
         } catch (Exception e) {

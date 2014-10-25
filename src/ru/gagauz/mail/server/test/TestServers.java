@@ -14,25 +14,25 @@ public class TestServers {
             }
         };
 
-        Thread t3 = new Thread() {
-            @Override
-            public void run() {
-                Server server1 = new Pop3Server(995, true);
-                server1.startServer();
-            }
-        };
+        //        Thread t3 = new Thread() {
+        //            @Override
+        //            public void run() {
+        //                Server server1 = new Pop3Server(995, true);
+        //                server1.startServer();
+        //            }
+        //        };
 
         Thread t2 = new Thread() {
             @Override
             public void run() {
-                Server server1 = new SmtpServer(25);
+                Server server1 = new SmtpServer(25, "ivaga.com");
                 server1.startServer();
             }
         };
         t1.setDaemon(true);
         t1.start();
-        t3.setDaemon(true);
-        t3.start();
+        //        t3.setDaemon(true);
+        //        t3.start();
         t2.setDaemon(true);
         t2.start();
         while (true) {

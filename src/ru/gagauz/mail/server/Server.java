@@ -77,6 +77,10 @@ public abstract class Server extends Thread {
 
     protected abstract CommandProcessor getCommandProcessor();
 
+    public ConnectionFactory getConnectionFactory() {
+        return connetcionFactory;
+    }
+
     protected void removeServerThread(ServerConnectionThread serverConnectionThread) {
         System.out.println("*** Connection with  " + serverConnectionThread.getSocket().socket.getRemoteSocketAddress() + " was closed.");
         openConnections.remove(serverConnectionThread.hashCode());

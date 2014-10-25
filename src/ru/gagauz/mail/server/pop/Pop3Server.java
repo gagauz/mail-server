@@ -15,7 +15,7 @@ public class Pop3Server extends Server {
 
     @Override
     protected CommandProcessor getCommandProcessor() {
-        DB db = new FileSysDB(new File("r:/mailbox"));
+        DB db = new FileSysDB(new File("/mailbox"));
         return new Pop3CommandProcessor(db);
     }
 

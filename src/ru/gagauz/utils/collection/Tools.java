@@ -19,4 +19,13 @@ public class Tools {
     public static <K, V> HashMap<K, V> hasMap() {
         return new HashMap<K, V>();
     }
+
+    public static boolean contains(Object[] objects, Object object) {
+        for (Object o : objects) {
+            if (o == object || (o != null && o.equals(object))) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
